@@ -36,4 +36,4 @@ OR
 
 ./drone -l 123123
 
-Lookups can be done with either an IP address/CIDR range or with an Incident ID (the script should gracefully detect which one you've supplied)
+Lookups can be done with either an IP address/CIDR range or with an Incident ID
