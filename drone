@@ -1,0 +1,63 @@
+#!/bin/bash
+url='http://dronebl.org/RPC2'
+
+key=$(<rpckey)
+
+while getopts ':aArRlL' type; do
+	case $type in
+		a|A)
+			method='add'
+			params="ip="'"'$2'"'" type="'"'$3'"'
+			if [[ -z "$2" ]]; then
+				echo "Please supply an IP address/CIDR range."
+				exit
+			elif [[ -z "$3" ]]; then
+				echo "Please supply a listing type. (https://dronebl.org/breakdown)"
+				exit
+			fi
+			;;
+		r|R)
+			method='remove'
+			params="id="'"'$2'"'
+			if [[ -z "$2" ]]; then
+				echo "Please supply an Incident ID."
+				exit
+			fi
+			;;
+		l|L)
+			method='lookup'
+			if [[ $2 == *"."* ]]; then
+				param_type="ip"
+			else
+				param_type="id"
+			fi
+			params="$param_type="'"'$2'"'
+			if [[ -z "$2" ]]; then
+				echo "Please supply an IP address/CIDR range or an Incident ID."
+				exit
+			fi
+			;;
+		\?)
+			echo "Invalid method. Aborting."
+			exit
+			;;
+	esac
+done
+
+if [[ -z "$method" ]]; then
+	echo "Usage: ./drone -a | -r | -l"
+	exit
+fi
+
+file=$method'.xml'
+
+cat >$file <<EOF
+<?xml version="1.0"?>
+<request key="$key">
+	<$method $params />
+</request>
+EOF
+
+curl -X POST -d @$file $url
+
+rm $file
