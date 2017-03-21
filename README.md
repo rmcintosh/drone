@@ -4,7 +4,7 @@ A bash utility for simplifying RPC2 calls to DroneBL (https://dronebl.org)
 # Install
 Replace the example key with your actual RPC key in rpckey.example then run:
 
-cp rpckey.example rpckey && rm rpckey.example
+mv rpckey.example rpckey
 
 # Usage
 
