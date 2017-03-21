@@ -9,7 +9,7 @@ while getopts ':aArRlL' type; do
 			method='add'
 			params="ip="'"'$2'"'" type="'"'$3'"'
 			if [[ -z "$2" ]]; then
-				echo "Please supply an IP address/CIDR range."
+				echo "Please supply an IP address."
 				exit
 			elif [[ -z "$3" ]]; then
 				echo "Please supply a listing type. (https://dronebl.org/breakdown)"
