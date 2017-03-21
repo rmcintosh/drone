@@ -20,7 +20,7 @@ mv rpckey.example rpckey
 
 ./drone -a 8.8.8.8 13
 
-Where 8.8.8.8 is an IP address or CIDR range and 13 is the class type for the listing
+Where 8.8.8.8 is an IP address and 13 is the class type for the listing
 
 --
 
